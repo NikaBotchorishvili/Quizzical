@@ -1,7 +1,13 @@
 import { useState } from "react";
-import "../assets/css/styles.css"
+import Quiz from "./Quiz";
+import "../assets/css/styles.css";
 function App() {
-  return <>Hello</>
+	const [quizStarted, setQuizStarted] = useState(false);
+	return (
+		<>
+			<Quiz quizStarted={quizStarted} setQuizStarted={setQuizStarted}/>
+		</>
+	);
 }
 
 export default App;
