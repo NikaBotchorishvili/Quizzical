@@ -52,11 +52,10 @@ export default function PossibleAnswer(props) {
     }
 	const btnStyle = !isFinished
 		? {
-				border: selected ? "none" : "1px solid #4D5B9E",
+				border:"1px solid #4D5B9E",
 				backgroundColor: selected ? "#D6DBF5" : "",
 		  }
 		: {
-            border: "none",
 
                 ...finishedBtnStyles,
 

@@ -36,7 +36,7 @@ export default function MainContextProvider({ children }) {
 							selected: false,
 							correct: true,
 						},
-					],
+					].sort((a, b) => 0.5 - Math.random()),
 				};
 			});
 			setQuizQuestions(questions);
