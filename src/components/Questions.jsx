@@ -1,68 +1,56 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState, useContext } from "react";
+//  COMPONENTS
+import Question from "./Question";
 
-export default function Questions() {
+// CONTEXTS
+import { MainContext } from "./context/MainContext";
 
-    useEffect(() =>{
-        fetch("https://opentdb.com/api.php?amount=5&category=15&difficulty=easy&type=multiple")
-            .then((res) => res.json())
-            .then((data) => console.log(data))
-    })
+export default function Questions(props) {
+	const {
+		quizStarted,
+		setQuizStarted,
+		quizQuestions,
+		isFinished,
+		setIsFinished,
+		handleApiRequest,
+	} = useContext(MainContext);
+	const { score, setScore } = useContext(MainContext);
 
+	const questionElements = quizQuestions.map((question, idx) => {
+		return (
+			<Question
+				question={question.question}
+				answers={question.answers}
+				key={idx}
+				id={question.id}
+			/>
+		);
+	});
+	function handleCheckAnswers() {
+		setIsFinished(true);
+	}
 
+	async function handlePlayAgain() {
+		setIsFinished(false);
+		setScore(0)
+		await handleApiRequest();
+	}
 	return (
 		<div className="questions">
-			<div className="questions-container">
-				<div className="question-container">
-					<div className="question">
-						<h1>How would one say goodbye in Spanish?</h1>
-					</div>
+			<div className="questions_container">{questionElements}</div>
+			<div className="scoreContainer">
+				{isFinished && <h1 className="score">You scores {score}/5</h1>}
 
-					<div className="possible-answers">
-						<button className="answer">Adiós</button>
-						<button className="answer">Hola</button>
-						<button className="answer">Au Revoir</button>
-						<button className="answer">Salir</button>
-					</div>
-				</div>
-				<div className="question-container">
-					<div className="question">
-						<h1>How would one say goodbye in Spanish?</h1>
-					</div>
-
-					<div className="possible-answers">
-						<button className="answer">Adiós</button>
-						<button className="answer">Hola</button>
-						<button className="answer">Au Revoir</button>
-						<button className="answer">Salir</button>
-					</div>
-				</div>
-				<div className="question-container">
-					<div className="question">
-						<h1>How would one say goodbye in Spanish?</h1>
-					</div>
-
-					<div className="possible-answers">
-						<button className="answer">Adiós</button>
-						<button className="answer">Hola</button>
-						<button className="answer">Au Revoir</button>
-						<button className="answer">Salir</button>
-					</div>
-				</div>
-				<div className="question-container">
-					<div className="question">
-						<h1>How would one say goodbye in Spanish?</h1>
-					</div>
-
-					<div className="possible-answers">
-						<button className="answer">Adiós</button>
-						<button className="answer">Hola</button>
-						<button className="answer">Au Revoir</button>
-						<button className="answer">Salir</button>
-					</div>
-				</div>
+				{quizStarted && !isFinished ? (
+					<button onClick={handleCheckAnswers} className="btn">
+						Check Answers
+					</button>
+				) : (
+					<button onClick={handlePlayAgain} className="btn">
+						Play Again
+					</button>
+				)}
 			</div>
-
-            <button className="btn">Check Answers</button>
 		</div>
 	);
 }

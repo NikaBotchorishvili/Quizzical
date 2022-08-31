@@ -1,15 +1,19 @@
-import React from "react";
-
-// Components
+import React, { useContext } from "react";
+// 	Components
 import StartQuiz from "./StartQuiz";
-
-//Imaes
-import topBlob from "../assets/images/top-blob.png";
-import bottomBlob from "../assets/images/bottom-blob.png";
 import Questions from "./Questions";
 
+//	Contexts
+
+import { MainContext } from "./context/MainContext";
+
+//Images
+import topBlob from "../assets/images/top-blob.png";
+import bottomBlob from "../assets/images/bottom-blob.png";
+
 export default function Quiz(props) {
-	const { quizStarted, setQuizStarted } = props;
+	
+	const { quizStarted, setQuizStarted } = useContext(MainContext);
 
 	return (
 		<div className="container">
@@ -18,13 +22,7 @@ export default function Quiz(props) {
 			</div>
 
 			<div className="middle">
-				{!quizStarted ? (
-					<StartQuiz
-						setQuizStarted={setQuizStarted}
-					/>
-				) : (
-					<Questions />
-				)}
+				{!quizStarted ? <StartQuiz /> : <Questions />}
 			</div>
 
 			<div className="bottom">

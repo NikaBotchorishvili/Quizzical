@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Quiz from "./Quiz";
 import "../assets/css/styles.css";
+import MainContextProvider from "./context/MainContext";
+
 function App() {
-	const [quizStarted, setQuizStarted] = useState(false);
+
 	return (
-		<>
-			<Quiz quizStarted={quizStarted} setQuizStarted={setQuizStarted}/>
-		</>
+		<MainContextProvider>
+			<Quiz/>
+		</MainContextProvider>
 	);
 }
 
