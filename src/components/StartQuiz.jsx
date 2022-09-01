@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { MainContext } from "./context/MainContext";
 // 	Contexts
 export default function StartQuiz(props) {
-	const { handleApiRequest } = useContext(MainContext);
+	const { handleApiRequest, isLoading, setIsLoading } = useContext(MainContext);
 
 	return (
 		<div className="start-quiz">

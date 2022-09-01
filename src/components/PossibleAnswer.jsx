@@ -3,9 +3,7 @@ import { MainContext } from "./context/MainContext";
 
 export default function PossibleAnswer(props) {
 	const { answer, correct, question_id, answer_id, selected } = props;
-	const { setScore, setQuizQuestions, isFinished } = useContext(
-		MainContext
-	);
+	const { setScore, setQuizQuestions, isFinished } = useContext(MainContext);
 
 	function handleClick() {
 		setQuizQuestions((prevQuizQuestions) => {
@@ -27,7 +25,6 @@ export default function PossibleAnswer(props) {
 			});
 			return newQuizQuestions;
 		});
-
 
 		if (correct && !selected) {
 			setScore((prevScore) => prevScore + 1);

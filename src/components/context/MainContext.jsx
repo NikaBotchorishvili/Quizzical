@@ -3,12 +3,13 @@ import { createContext, useState } from "react";
 export const MainContext = createContext({});
 
 export default function MainContextProvider({ children }) {
-	const [quizQuestions, setQuizQuestions] = useState();
+	const [quizQuestions, setQuizQuestions] = useState(null);
 	const [score, setScore] = useState(0);
 	const [quizStarted, setQuizStarted] = useState(false);
 	const [isFinished, setIsFinished] = useState(false);
-
+	const [isLoading, setIsLoading] = useState(false);
 	async function handleApiRequest() {
+		setIsLoading(true);
 		try {
 			let response = await fetch(
 				"https://opentdb.com/api.php?amount=5&category=15&difficulty=easy&type=multiple"
@@ -41,6 +42,8 @@ export default function MainContextProvider({ children }) {
 			});
 			setQuizQuestions(questions);
 			setQuizStarted(true);
+
+			setIsLoading(false);
 		} catch (err) {
 			console.log(err);
 		}
@@ -59,6 +62,9 @@ export default function MainContextProvider({ children }) {
 		isFinished: isFinished,
 		setIsFinished: setIsFinished,
 
+		isLoading: isLoading,
+		setIsLoading: isLoading,
+		
 		handleApiRequest: handleApiRequest,
 	};
 	return (

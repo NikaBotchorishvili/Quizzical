@@ -12,10 +12,13 @@ export default function Questions(props) {
 		isFinished,
 		setIsFinished,
 		handleApiRequest,
+		loading,
 	} = useContext(MainContext);
+
 	const { score, setScore } = useContext(MainContext);
 
 	const [errors, setErrors] = useState({});
+	
 	const questionElements = quizQuestions.map((question, idx) => {
 		return (
 			<Question
@@ -53,7 +56,7 @@ export default function Questions(props) {
 		handleApiRequest();
 	}
 
-	return (
+	return(
 		<div className="questions">
 			<div className="questions_container">{questionElements}</div>
 			{errors.selectionError && (
@@ -72,5 +75,7 @@ export default function Questions(props) {
 				)}
 			</div>
 		</div>
-	);
+	)
+
+
 }
