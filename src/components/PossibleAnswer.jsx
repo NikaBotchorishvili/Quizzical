@@ -6,32 +6,34 @@ export default function PossibleAnswer(props) {
 	const { setScore, setQuizQuestions, isFinished } = useContext(MainContext);
 
 	function handleClick() {
-		setQuizQuestions((prevQuizQuestions) => {
-			const newQuizQuestions = prevQuizQuestions.map((quizQuestion) => {
-				if (question_id == quizQuestion.id) {
-					return {
-						...quizQuestion,
-						answers: quizQuestion.answers.map((answer) => {
-							if (answer_id == answer.id) {
-								return { ...answer, selected: !answer.selected };
-							} else {
-								return { ...answer, selected: false };
-							}
-						}),
-					};
-				} else {
-					return quizQuestion;
-				}
+		if (!isFinished) {
+			setQuizQuestions((prevQuizQuestions) => {
+				const newQuizQuestions = prevQuizQuestions.map((quizQuestion) => {
+					if (question_id == quizQuestion.id) {
+						return {
+							...quizQuestion,
+							answers: quizQuestion.answers.map((answer) => {
+								if (answer_id == answer.id) {
+									return { ...answer, selected: !answer.selected };
+								} else {
+									return { ...answer, selected: false };
+								}
+							}),
+						};
+					} else {
+						return quizQuestion;
+					}
+				});
+				return newQuizQuestions;
 			});
-			return newQuizQuestions;
-		});
 
-		if (correct && !selected) {
-			setScore((prevScore) => prevScore + 1);
-		}
+			if (correct && !selected) {
+				setScore((prevScore) => prevScore + 1);
+			}
 
-		if (correct && selected) {
-			setScore((prevScore) => prevScore - 1);
+			if (correct && selected) {
+				setScore((prevScore) => prevScore - 1);
+			}
 		}
 	}
 
