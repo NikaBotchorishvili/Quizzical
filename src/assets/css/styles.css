@@ -118,3 +118,9 @@
 	cursor: pointer;
 	border: 1px solid black;
 }
+
+
+.error{
+	color: red;
+	font-family: "Inter", sans-serif;
+}

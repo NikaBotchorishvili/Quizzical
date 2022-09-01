@@ -4,10 +4,9 @@ import "../assets/css/styles.css";
 import MainContextProvider from "./context/MainContext";
 
 function App() {
-
 	return (
 		<MainContextProvider>
-			<Quiz/>
+			<Quiz />
 		</MainContextProvider>
 	);
 }

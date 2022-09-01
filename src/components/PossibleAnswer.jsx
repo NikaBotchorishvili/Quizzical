@@ -3,7 +3,9 @@ import { MainContext } from "./context/MainContext";
 
 export default function PossibleAnswer(props) {
 	const { answer, correct, question_id, answer_id, selected } = props;
-	const { setScore, setQuizQuestions, isFinished } = useContext(MainContext);
+	const { setScore, setQuizQuestions, isFinished } = useContext(
+		MainContext
+	);
 
 	function handleClick() {
 		setQuizQuestions((prevQuizQuestions) => {
@@ -26,6 +28,7 @@ export default function PossibleAnswer(props) {
 			return newQuizQuestions;
 		});
 
+
 		if (correct && !selected) {
 			setScore((prevScore) => prevScore + 1);
 		}
@@ -41,24 +44,22 @@ export default function PossibleAnswer(props) {
 		finishedBtnStyles = {
 			backgroundColor: "#94D7A2",
 		};
-	}else if(!correct && selected){
-        finishedBtnStyles = {
-            backgroundColor: "#F8BCBC",
-        }
-    }else if(!correct && !selected) {
-        finishedBtnStyles = {
-            border: "1px solid #4D5B9E"
-        }
-    }
+	} else if (!correct && selected) {
+		finishedBtnStyles = {
+			backgroundColor: "#F8BCBC",
+		};
+	} else if (!correct && !selected) {
+		finishedBtnStyles = {
+			border: "1px solid #4D5B9E",
+		};
+	}
 	const btnStyle = !isFinished
 		? {
-				border:"1px solid #4D5B9E",
+				border: "1px solid #4D5B9E",
 				backgroundColor: selected ? "#D6DBF5" : "",
 		  }
 		: {
-
-                ...finishedBtnStyles,
-
+				...finishedBtnStyles,
 		  };
 
 	return (

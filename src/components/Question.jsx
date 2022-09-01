@@ -9,14 +9,10 @@ export default function Question(props) {
 	const questionElement = (
 		<div className="question_container">
 			<div className="question">
-				<h1 dangerouslySetInnerHTML={{__html: question}}/>
+				<h1 dangerouslySetInnerHTML={{ __html: question }} />
 			</div>
 
-			<PossibleAnswers
-				key={1}
-				answers={answers}
-				id={id}
-			/>
+			<PossibleAnswers key={1} answers={answers} id={id} />
 		</div>
 	);
 	return questionElement;

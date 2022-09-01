@@ -12,8 +12,7 @@ import topBlob from "../assets/images/top-blob.png";
 import bottomBlob from "../assets/images/bottom-blob.png";
 
 export default function Quiz(props) {
-	
-	const { quizStarted, setQuizStarted } = useContext(MainContext);
+	const { quizStarted } = useContext(MainContext);
 
 	return (
 		<div className="container">

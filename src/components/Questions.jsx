@@ -8,7 +8,6 @@ import { MainContext } from "./context/MainContext";
 export default function Questions(props) {
 	const {
 		quizStarted,
-		setQuizStarted,
 		quizQuestions,
 		isFinished,
 		setIsFinished,
@@ -16,6 +15,7 @@ export default function Questions(props) {
 	} = useContext(MainContext);
 	const { score, setScore } = useContext(MainContext);
 
+	const [errors, setErrors] = useState({});
 	const questionElements = quizQuestions.map((question, idx) => {
 		return (
 			<Question
@@ -27,20 +27,40 @@ export default function Questions(props) {
 		);
 	});
 	function handleCheckAnswers() {
-		setIsFinished(true);
+		let selected = 0;
+
+		const selectedValidator = quizQuestions.map((question) => {
+			return question.answers.map((answer) => {
+				if (answer.selected) {
+					selected++;
+				}
+			});
+		});
+		if (selected == 5) {
+			setIsFinished(true);
+		} else {
+			setErrors((prevErrors) => {
+				return {
+					...prevErrors,
+					selectionError: `Selection Error: ${5 - selected}/5 is not selected`,
+				};
+			});
+		}
+	}
+	function handlePlayAgain() {
+		setIsFinished(false);
+		setScore(0);
+		handleApiRequest();
 	}
 
-	async function handlePlayAgain() {
-		setIsFinished(false);
-		setScore(0)
-		await handleApiRequest();
-	}
 	return (
 		<div className="questions">
 			<div className="questions_container">{questionElements}</div>
+			{errors.selectionError && (
+				<h3 className="error">{errors.selectionError} </h3>
+			)}
 			<div className="scoreContainer">
 				{isFinished && <h1 className="score">You scores {score}/5</h1>}
-
 				{quizStarted && !isFinished ? (
 					<button onClick={handleCheckAnswers} className="btn">
 						Check Answers
