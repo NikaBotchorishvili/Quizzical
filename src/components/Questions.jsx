@@ -60,7 +60,7 @@ export default function Questions(props) {
 				<h3 className="error">{errors.selectionError} </h3>
 			)}
 			<div className="scoreContainer">
-				{isFinished && <h1 className="score">You scores {score}/5</h1>}
+				{isFinished && <h1 className="score">You scored {score}/5</h1>}
 				{quizStarted && !isFinished ? (
 					<button onClick={handleCheckAnswers} className="btn">
 						Check Answers
