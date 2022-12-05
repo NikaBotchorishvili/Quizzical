@@ -3,6 +3,10 @@
 	padding: 0;
 }
 
+body{
+	overflow: hidden;
+}
+
 .container {
 	background: #f5f7fb;
 	width: 100vw;

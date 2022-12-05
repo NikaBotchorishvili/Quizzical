@@ -8,6 +8,7 @@ export default function MainContextProvider({ children }) {
 	const [quizStarted, setQuizStarted] = useState(false);
 	const [isFinished, setIsFinished] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+	
 	async function handleApiRequest() {
 		setIsLoading(true);
 		try {
@@ -64,7 +65,7 @@ export default function MainContextProvider({ children }) {
 
 		isLoading: isLoading,
 		setIsLoading: isLoading,
-		
+
 		handleApiRequest: handleApiRequest,
 	};
 	return (
